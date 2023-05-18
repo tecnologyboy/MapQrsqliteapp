@@ -36,9 +36,21 @@ class _HomePageBody extends StatelessWidget {
     final currentIndx = uiProvider.selectedMenuOpt;
 
     //TODO: Temportal, Leer DB
-    final ScanM = new ScanModel(value: 'https://www.medaglob.com');
+    //final ScanM = new ScanModel(value: 'https://www.covid19.com');
 
-    DBProvider.db.newScan(ScanM);
+    // DBProvider.db.getScanById(2).then((s) => print(s.value));
+
+    // DBProvider.db.getScansByType('https').then(print);
+
+    // DBProvider.db.getAllScan().then(print);
+
+    //DBProvider.db.newScan(ScanM);
+
+    // ScanModel smodel =
+    //     ScanModel(id: 2, type: 'https', value: 'http://wwww.ah1n1.com');
+
+    // DBProvider.db.updateScan(smodel);
+    DBProvider.db.deleteAllScans().then(print);
 
     switch (currentIndx) {
       case 0:

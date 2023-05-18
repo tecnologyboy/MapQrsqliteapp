@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_reader/models/scan_models.dart';
@@ -61,5 +62,91 @@ class DBProvider {
     final res = await db?.insert('scans', newScan.toJson());
 
     return res!;
+  }
+
+  Future<ScanModel> getScanById(int id) async {
+    final db = await database;
+    final res = await db!.query('Scans', where: 'id=?', whereArgs: [id]);
+
+    //TODO: Buscar la forma de que funcione con if ternario
+
+    // return res.isNotEmpty
+    //         ? ScanModel.fromJson(res.first)
+    //         : [];
+
+    final rtn;
+    if (res.isNotEmpty) {
+      rtn = ScanModel.fromJson(res.first);
+    } else {
+      rtn = [];
+    }
+
+    return rtn;
+  }
+
+  Future<List<ScanModel>> getAllScan() async {
+    final db = await database;
+    final res = await db!.query('Scans');
+
+    //TODO: Buscar la forma de que funcione con if ternario
+
+    // return res.isNotEmpty
+    //         ? ScanModel.fromJson(res.first)
+    //         : [];
+
+    final rtn;
+    if (res.isNotEmpty) {
+      rtn = res.map((e) => ScanModel.fromJson(e)).toList();
+    } else {
+      rtn = [];
+    }
+
+    return rtn;
+  }
+
+  Future<List<dynamic>> getScansByType(String type) async {
+    final db = await database;
+    final res = await db!.rawQuery('''
+        SELECT * FROM Scans WHERE type = '$type'
+
+    ''');
+
+    //TODO: Buscar la forma de que funcione con if ternario
+
+    // return res.isNotEmpty
+    //         ? ScanModel.fromJson(res.first)
+    //         : [];
+
+    final rtn;
+    if (res.isNotEmpty) {
+      rtn = res.map((e) => ScanModel.fromJson(e)).toList();
+    } else {
+      rtn = [];
+    }
+
+    return rtn;
+  }
+
+  Future<int> updateScan(ScanModel updateRecord) async {
+    final db = await database;
+
+    final res = await db!.update('Scans', updateRecord.toJson(),
+        where: 'id =?', whereArgs: [updateRecord.id]);
+
+    return res;
+  }
+
+  Future<int> deleteScans(int id) async {
+    final db = await database;
+    final res = await db!.delete('scans', where: 'id=?', whereArgs: [id]);
+    return res;
+  }
+
+  Future<int> deleteAllScans() async {
+    final db = await database;
+    final res = await db!.rawDelete('''
+      DELETE FROM scans
+    ''');
+    return res;
   }
 }
