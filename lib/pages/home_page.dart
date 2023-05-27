@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_reader/pages/pages.dart';
 import 'package:qr_reader/providers/db_provider.dart';
+import 'package:qr_reader/providers/scan_list_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 import 'package:qr_reader/widgets/widgets.dart';
 
@@ -35,27 +36,15 @@ class _HomePageBody extends StatelessWidget {
 
     final currentIndx = uiProvider.selectedMenuOpt;
 
-    //TODO: Temportal, Leer DB
-    //final ScanM = new ScanModel(value: 'https://www.covid19.com');
-
-    // DBProvider.db.getScanById(2).then((s) => print(s.value));
-
-    // DBProvider.db.getScansByType('https').then(print);
-
-    // DBProvider.db.getAllScan().then(print);
-
-    //DBProvider.db.newScan(ScanM);
-
-    // ScanModel smodel =
-    //     ScanModel(id: 2, type: 'https', value: 'http://wwww.ah1n1.com');
-
-    // DBProvider.db.updateScan(smodel);
-    DBProvider.db.deleteAllScans().then(print);
+    //Usar el ScanListProvider
+    final scanListProvider = Provider.of<ScanListProvider>(context);
 
     switch (currentIndx) {
       case 0:
+        scanListProvider.uploadScansByType('geo');
         return MapHistory();
       case 1:
+        scanListProvider.uploadScansByType('https');
         return AddressPage();
 
       default:
