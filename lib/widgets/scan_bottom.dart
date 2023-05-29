@@ -22,6 +22,7 @@ class ScanBottom extends StatelessWidget {
 
         //scanListProvider.newScans(barcodeScanRes);
         scanListProvider.newScans('geo:192.167,22.149');
+        scanListProvider.newScans(barcodeScanRes);
       },
     );
   }

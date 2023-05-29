@@ -10,16 +10,16 @@ class AddressPage extends StatelessWidget {
 
     return ListView.builder(
       itemCount: scanListProvider.scans.length,
-      itemBuilder: (BuildContext _, int index) => ListTile(
+      itemBuilder: (_, i) => ListTile(
         leading:
             Icon(Icons.home_outlined, color: Theme.of(context).primaryColor),
-        title: Text(scanListProvider.scans[index].value),
-        subtitle: Text('${scanListProvider.scans[index].id}'),
+        title: Text(scanListProvider.scans[i].value),
+        subtitle: Text('${scanListProvider.scans[i].id}'),
         trailing: const Icon(
           Icons.keyboard_arrow_right,
           color: Colors.grey,
         ),
-        onTap: () => print(scanListProvider.scans[index].id),
+        onTap: () => print(scanListProvider.scans[i].id),
       ),
     );
   }
