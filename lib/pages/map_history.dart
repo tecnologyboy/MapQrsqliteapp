@@ -18,23 +18,24 @@ class MapHistory extends StatelessWidget {
       itemBuilder: (_, i) => Dismissible(
         //TODO: Investigar por que el UniqueKey del profesor no funciona y por que da error si generamos un key unico nosotros mismos
 
-        key: Key(i.toString()),
+        key: Key(scans[i].id.toString()),
         background: Container(
           color: Colors.red,
         ),
         onDismissed: (direction) {
-          //scans.removeAt(i);
+          scans.removeAt(i);
         },
         child: ListTile(
-          leading: Icon(Icons.map, color: Theme.of(context).primaryColor),
-          title: Text(scans[i].value),
-          subtitle: Text(scans[i].id.toString()),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.grey,
-          ),
-          onTap: () => print(scans[i].id),
-        ),
+            leading: Icon(Icons.map, color: Theme.of(context).primaryColor),
+            title: Text(scans[i].value),
+            subtitle: Text(scans[i].id.toString()),
+            trailing: const Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.grey,
+            ),
+            onTap: () =>
+                print(Key('#${scans[i].id.toString()}')) // scans[i].id),
+            ),
       ),
     );
   }

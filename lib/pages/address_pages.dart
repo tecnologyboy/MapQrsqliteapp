@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../providers/scan_list_provider.dart';
 
 class AddressPage extends StatelessWidget {
+  const AddressPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final scanListProvider = Provider.of<ScanListProvider>(context);
