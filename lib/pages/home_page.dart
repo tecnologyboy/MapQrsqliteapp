@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_reader/pages/dismissible_page.dart';
 import 'package:qr_reader/pages/pages.dart';
+import 'package:qr_reader/providers/db_provider.dart';
 import 'package:qr_reader/providers/scan_list_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 import 'package:qr_reader/widgets/widgets.dart';
@@ -42,7 +42,8 @@ class _HomePageBody extends StatelessWidget {
     final currentIndx = uiProvider.selectedMenuOpt;
 
     //Usar el ScanListProvider
-    final scanListProvider = Provider.of<ScanListProvider>(context);
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
 
     switch (currentIndx) {
       case 0:

@@ -23,7 +23,7 @@ class MapHistory extends StatelessWidget {
           color: Colors.red,
         ),
         onDismissed: (direction) {
-          scans.removeAt(i);
+          //scans.removeAt(i);
         },
         child: ListTile(
             leading: Icon(Icons.map, color: Theme.of(context).primaryColor),
@@ -34,7 +34,8 @@ class MapHistory extends StatelessWidget {
               color: Colors.grey,
             ),
             onTap: () =>
-                print(Key('#${scans[i].id.toString()}')) // scans[i].id),
+                //print(Key('#${scans[i].id.toString()}')) // scans[i].id),
+                print(scans[i].id) // scans[i].id),
             ),
       ),
     );
