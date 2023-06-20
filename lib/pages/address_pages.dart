@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/scan_list_provider.dart';
+import 'package:qr_reader/widgets/scan_tiles.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final scanListProvider = Provider.of<ScanListProvider>(context);
-
-    return ListView.builder(
-      itemCount: scanListProvider.scans.length,
-      itemBuilder: (_, i) => ListTile(
-        leading:
-            Icon(Icons.home_outlined, color: Theme.of(context).primaryColor),
-        title: Text(scanListProvider.scans[i].value),
-        subtitle: Text('${scanListProvider.scans[i].id}'),
-        trailing: const Icon(
-          Icons.keyboard_arrow_right,
-          color: Colors.grey,
-        ),
-        onTap: () => print(scanListProvider.scans[i].id),
-      ),
-    );
+    return const ScanTiles(type: "http");
   }
 }
