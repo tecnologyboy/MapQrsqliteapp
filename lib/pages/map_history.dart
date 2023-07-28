@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/scan_tiles.dart';
 
 class MapHistory extends StatelessWidget {

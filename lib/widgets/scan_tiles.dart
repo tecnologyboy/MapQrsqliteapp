@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_reader/utils/launch_url.dart';
 
 import '../providers/scan_list_provider.dart';
 
@@ -11,12 +12,19 @@ class ScanTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scanListProvider = Provider.of<ScanListProvider>(context);
+    final scans = scanListProvider.scans;
 
     return ListView.builder(
       itemCount: scanListProvider.scans.length,
       itemBuilder: (_, i) => Dismissible(
         key: UniqueKey(),
-        onDismissed: (direction) {},
+        background: Container(
+          color: Colors.red,
+        ),
+        onDismissed: (direction) {
+          Provider.of<ScanListProvider>(context, listen: false)
+              .deleteScansById(scans[i].id!);
+        },
         child: ListTile(
           leading: Icon(
               type == "http" ? Icons.home_outlined : Icons.map_outlined,
@@ -27,7 +35,7 @@ class ScanTiles extends StatelessWidget {
             Icons.keyboard_arrow_right,
             color: Colors.grey,
           ),
-          onTap: () => print(scanListProvider.scans[i].id),
+          onTap: () => launchUrl(context, scans[i]),
         ),
       ),
     );
